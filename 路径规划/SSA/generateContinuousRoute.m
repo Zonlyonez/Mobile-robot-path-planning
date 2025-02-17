@@ -9,27 +9,27 @@ f=1;
 while j ~=dim&&f<200
     xa = route(j);
     xb = route(j+1);
-    h = abs(xa - xb); % Á½ÏàÁÚÕ¤¸ñ¸ß¶È²î
-    if h == 0         % Á½Õ¤¸ñÎ»ÓÚÍ¬Ò»ÐÐ
+    h = abs(xa - xb); % ä¸¤ç›¸é‚»æ …æ ¼é«˜åº¦å·®
+    if h == 0         % ä¸¤æ …æ ¼ä½äºŽåŒä¸€è¡Œ
         path = [path ; route(j+1) j+1];
-    elseif h == 1     % Á½Õ¤¸ñÎ»ÓÚÏàÁÚÐÐ
+    elseif h == 1     % ä¸¤æ …æ ¼ä½äºŽç›¸é‚»è¡Œ
         path = [path ; route(j+1) j+1];
     else
         k=0;
         while k==0
-            if xa <= xb              % xaÕ¤¸ñÎ»ÓÚxbÕ¤¸ñµÄÏÂ·½
-                if all(G(xa:xb,j) == 0)    % µÚjÐÐxaµ½xbÈ«Îª×ÔÓÉÕ¤¸ñ
+            if xa <= xb              % xaæ …æ ¼ä½äºŽxbæ …æ ¼çš„ä¸‹æ–¹
+                if all(G(xa:xb,j) == 0)    % ç¬¬jè¡Œxaåˆ°xbå…¨ä¸ºè‡ªç”±æ …æ ¼
                     path = [path; (xa+1:xb-1)' j*ones(h-1,1);route(j+1) j+1];
                     
-                else     % µÚjÐÐxaµ½xb²»È«Îª×ÔÓÉÕ¤¸ñ
-                    w = xa;    % µÚw¸öÎªxaµ½xbÖ®¼äµÄµÚÒ»¸öÕÏ°­Õ¤¸ñ
+                else     % ç¬¬jè¡Œxaåˆ°xbä¸å…¨ä¸ºè‡ªç”±æ …æ ¼
+                    w = xa;    % ç¬¬wä¸ªä¸ºxaåˆ°xbä¹‹é—´çš„ç¬¬ä¸€ä¸ªéšœç¢æ …æ ¼
                     for k = xa:xb
                         if G(k,j) == 1
                             w = k;
                             break
                         end
                     end
-                    if  all(G(w:xb,j+1)==0)    % µÚj+1ÁÐwµ½wbÈ«Îª×ÔÓÉÕ¤¸ñ
+                    if  all(G(w:xb,j+1)==0)    % ç¬¬j+1åˆ—wåˆ°wbå…¨ä¸ºè‡ªç”±æ …æ ¼
                          path = [path; (xa+1:w-1)' j*ones(w-xa-1,1);(w:xb)' (j+1)*ones(xb-w+1,1)];
                     else
                         mm=h;
@@ -43,25 +43,25 @@ while j ~=dim&&f<200
                             end
                             mm=mm-1;
                         end 
-                        j=j-1;
+                        j=j-1;   %è¿™ä¸ªéœ€è¦åŽ»æŽ‰ä¸éœ€è¦j-1
                         continue;
                     end
                 end
              
             else
-                if all(G(xa:-1:xb,j) == 0)    % µÚjÐÐxaµ½xbÈ«Îª×ÔÓÉÕ¤¸ñ
+                if all(G(xa:-1:xb,j) == 0)    % ç¬¬jè¡Œxaåˆ°xbå…¨ä¸ºè‡ªç”±æ …æ ¼
                     
                         path = [path; (xa-1:-1:xb+1)' j*ones(h-1,1);route(j+1) j+1];
                 
-                else     % µÚjÐÐxaµ½xb²»È«Îª×ÔÓÉÕ¤¸ñ
-                    w = xa;    % µÚw¸öÎªxaµ½xbÖ®¼äµÄµÚÒ»¸öÕÏ°­Õ¤¸ñ
+                else     % ç¬¬jè¡Œxaåˆ°xbä¸å…¨ä¸ºè‡ªç”±æ …æ ¼
+                    w = xa;    % ç¬¬wä¸ªä¸ºxaåˆ°xbä¹‹é—´çš„ç¬¬ä¸€ä¸ªéšœç¢æ …æ ¼
                     for k = xa:-1:xb
                         if G(k,j) == 1
                             w = k;
                             break
                         end
                     end
-                    if  all(G(w:-1:xb,j+1)==0)    % µÚj+1ÁÐwµ½wbÈ«Îª×ÔÓÉÕ¤¸ñ
+                    if  all(G(w:-1:xb,j+1)==0)    % ç¬¬j+1åˆ—wåˆ°wbå…¨ä¸ºè‡ªç”±æ …æ ¼
                          path = [path; (xa-1:-1:w+1)' j*ones(xa-w-1,1);(w:-1:xb)' (j+1)*ones(w-xb+1,1)];
                     else
                         mm=h;
@@ -74,7 +74,7 @@ while j ~=dim&&f<200
                             end
                             mm=mm-1;
                        end 
-                       j=j-1;
+                       j=j-1;    %è¿™ä¸ªéœ€è¦åŽ»æŽ‰ä¸éœ€è¦j-1
                        continue;
                     end
                 end
